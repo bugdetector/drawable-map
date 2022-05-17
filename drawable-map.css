@@ -1,0 +1,36 @@
+html, body{
+  height: 100%;
+}
+.drawable-map {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.drawable-map .map-container{
+  width: 100%;
+}
+
+.google-map {
+  height: 100%;
+}
+
+.panel {
+  width: 500px;
+  font-size: 13px;
+  padding: 10px;
+}
+
+.map-search{
+  width: 100%;
+}
+
+.color-button {
+  width: 14px;
+  height: 14px;
+  font-size: 0;
+  margin: 2px;
+  float: left;
+  cursor: pointer;
+  margin-bottom: 5px;
+}

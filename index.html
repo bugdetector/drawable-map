@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>Drawing Tools</title>
+    <script type="text/javascript"
+        src="http://maps.google.com/maps/api/js?key=<API_KEY>&libraries=drawing,places"></script>
+    <script src="./drawable-map.js"></script>
+    <link rel="stylesheet" href="./drawable-map.css" />
+    <script>
+        window.addEventListener("load", function () {
+            window.drawableMap = DrawableMap.initialize(document.getElementsByClassName("drawablemap")[0]);
+            let locationUpdateCount = 0;
+            var geolocation_id = navigator.geolocation.watchPosition(
+                function (pos) {
+                    drawableMap.updateCurrentLocation({
+                        lng: pos.coords.longitude,
+                        lat: pos.coords.latitude
+                    },
+                        locationUpdateCount++
+                    );
+                },
+                function (err) {
+                    if (err.code == 1) {
+                        alert("Please give location permission.");
+                    }
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                }
+            );
+        });
+    </script>
+</head>
+
+<body>
+    <div class="drawablemap"></div>
+</body>
+
+</html>
