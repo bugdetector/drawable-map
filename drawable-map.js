@@ -247,6 +247,29 @@ class DrawableMap {
             searchBox.set('map', drawableMap.map);
             drawableMap.map.setZoom(Math.min(drawableMap.map.getZoom(), 15));
         });
+
+        searchBox.addListener("places_changed", () => {
+            const places = searchBox.getPlaces();
+        
+            if (places.length == 0) {
+              return;
+            }
+            const bounds = new google.maps.LatLngBounds();
+        
+            places.forEach((place) => {
+              if (!place.geometry || !place.geometry.location) {
+                console.log("Returned place contains no geometry");
+                return;
+              }
+              if (place.geometry.viewport) {
+                bounds.union(place.geometry.viewport);
+              } else {
+                bounds.extend(place.geometry.location);
+              }
+            });
+            drawableMap.map.fitBounds(bounds);
+          });
+
         return drawableMap;
     }
 }
